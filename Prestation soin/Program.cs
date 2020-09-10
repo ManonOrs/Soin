@@ -39,7 +39,7 @@ namespace Prestation_soin
         static void Main(string[] args)
         {
             Intervenant intervenant1 = new Intervenant("Jean", "Didier");
-            IntervenantExterne intervenant2 = new IntervenantExterne("Cardiologue", "Marseille", "06 98 45 21 23", "Viencent", "Frasel");
+            IntervenantExterne intervenant2 = new IntervenantExterne("Cardiologue", "Marseille", "06 98 45 21 23", "Vincent", "Frasel");
 
             DateTime date1 = new DateTime(2000, 8, 21);
             DateTime date2 = new DateTime(2015, 7, 15);

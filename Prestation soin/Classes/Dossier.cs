@@ -82,7 +82,7 @@ namespace Prestation_soin.Classes
             Console.WriteLine("Nom: " + this.nomPatient + "   Prenom: " + prenomPatient + "   Date de naissance: " + this.dateNaissancePatient.ToString("dd/MM/yyyy"));
             foreach(Prestation prest in mesPrestation)
             {
-                Console.WriteLine("   Libelle " + prest.getLibelle() + " - " + prest.getDateHeureSoin() +  " - Intervenant: " + prest.getL_Intervenant().);
+                Console.WriteLine("   Libelle " + prest.getLibelle() + " - " + prest.getDateHeureSoin() +  " - Intervenant: " + prest.getL_Intervenant().getNom + " - " + prest.getL_Intervenant().getPrenom);
             }
         }
 
