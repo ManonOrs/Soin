@@ -84,6 +84,9 @@ namespace Prestation_soin.Classes
             {
                 Console.WriteLine("   Libelle " + prest.getLibelle() + " - " + prest.getDateHeureSoin() +  " - Intervenant: " + prest.getL_Intervenant().getNom + " - " + prest.getL_Intervenant().getPrenom);
             }
+            Console.WriteLine("---- Fin dossier -----");
+            Console.WriteLine("Nombre de jours de soins: " + this.getNbJoursSoins());
+            Console.WriteLine("Nombres de soins externes: " + this.getNbPrestationsExternes());
         }
 
     }
