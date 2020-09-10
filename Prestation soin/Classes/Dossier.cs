@@ -23,12 +23,20 @@ namespace Prestation_soin.Classes
             this.mesPrestation = new List<Prestation>();
         }
 
+        public Dossier(string nomPatient, string prenomPatient)
+        {
+            this.nomPatient = nomPatient;
+            this.prenomPatient = prenomPatient;
+            this.dateNaissancePatient = new DateTime(2000,08,21);
+            this.mesPrestation = new List<Prestation>();
+        }
+
         //Accesseurs
 
         //Méthodes
-        public void ajoutePrestation(string unLibelle, DateTime uneDate, DateTime uneHeure, Intervenant unIntervenant)
+        public void ajoutePrestation(string unLibelle, DateTime uneDateHeure, Intervenant unIntervenant)
         {
-            mesPrestation.Add(new Prestation(unLibelle, uneDate, uneHeure, unIntervenant));
+            mesPrestation.Add(new Prestation(unLibelle, uneDateHeure, unIntervenant));
         }
 
         public int getNbPrestationsExternes()
@@ -44,28 +52,38 @@ namespace Prestation_soin.Classes
             return cpt;
         }
 
+        //public int getNbJoursSoins()
+        //{
+        //    int cpt = 1;
+        //    Prestation unePrestation;
+        //    if(this.mesPrestation.Count() == 0)
+        //    {
+        //        return 0;
+        //    }
+
+        //    unePrestation = this.mesPrestation[1];
+        //    foreach(var maPrestation in mesPrestation)
+        //    {
+        //        cpt = cpt + maPrestation.compareTo(unePrestation);
+        //        unePrestation = maPrestation;
+        //    }
+
+        //    return cpt;
+        //}
+
         public int getNbJoursSoins()
         {
-            int cpt = 1;
-            Prestation unePrestation;
-            if(this.mesPrestation.Count() == 0)
-            {
-                return 0;
-            }
-
-            unePrestation = this.mesPrestation[1];
-            foreach(var maPrestation in mesPrestation)
-            {
-                cpt = cpt + maPrestation.compareTo(unePrestation);
-                unePrestation = maPrestation;
-            }
-
-            return cpt;
+            return this.mesPrestation.Select(x => x.getDateHeureSoin().Date).Distinct().Count();
         }
 
         public void afficheDossier()
         {
-            Console.WriteLine("yo");
+            Console.WriteLine("----- Début dossier -----");
+            Console.WriteLine("Nom: " + this.nomPatient + "   Prenom: " + prenomPatient + "   Date de naissance: " + this.dateNaissancePatient.ToString("dd/MM/yyyy"));
+            foreach(Prestation prest in mesPrestation)
+            {
+                Console.WriteLine("   Libelle " + prest.getLibelle() + " - " + prest.getDateHeureSoin() +  " - Intervenant: " + prest.getL_Intervenant().);
+            }
         }
 
     }

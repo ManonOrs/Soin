@@ -10,16 +10,14 @@ namespace Prestation_soin.Classes
     {
         //
         private string libelle;
-        private DateTime dateSoin;
-        private DateTime heureSoin;
+        private DateTime dateHeureSoin;
         private Intervenant L_Intervenant;
 
         //Constructeur
-        public Prestation(string libelle, DateTime dateSoin, DateTime heureSoin, Intervenant intervenant)
+        public Prestation(string libelle, DateTime dateHeureSoin, Intervenant intervenant)
         {
             this.libelle = libelle;
-            this.dateSoin = dateSoin;
-            this.heureSoin = heureSoin;
+            this.dateHeureSoin = dateHeureSoin;
             this.L_Intervenant = intervenant;
 
             this.L_Intervenant.ajoutePrestation(this);
@@ -27,15 +25,16 @@ namespace Prestation_soin.Classes
         }
 
         //Accesseurs
-        public DateTime getDateSoin()
+        public DateTime getDateHeureSoin()
         {
-            return this.dateSoin;
+            return this.dateHeureSoin;
         }
 
-        public DateTime getHeureSoin()
+        public string getLibelle()
         {
-            return this.heureSoin;
+            return this.libelle;
         }
+
 
         public Intervenant getL_Intervenant()
         {
@@ -45,11 +44,11 @@ namespace Prestation_soin.Classes
         //Methodes
         public int compareTo(Prestation unePrestation)
         {
-            if (this.dateSoin == unePrestation.getDateSoin())
+            if (this.dateHeureSoin == unePrestation.getDateHeureSoin())
             {
                 return 0;
             }
-            else if (this.dateSoin > unePrestation.getDateSoin())
+            else if (this.dateHeureSoin > unePrestation.getDateHeureSoin())
             {
                 return 1;
             }
