@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,9 +72,10 @@ namespace Prestation_soin.Classes
             /// <param name="racine">2lément racine du fichier XML à partir duquel la recherche d'éléments va s'effectuer</param>
             private static void Initialiser(XmlElement racine)
             {
-                LesDossiers = racine.ChildNodes...
-            
-        }
+            LesDossiers = racine.ChildNodes[0].ChildNodes;
+            LesPrestations = racine.ChildNodes[1].ChildNodes;
+            LesIntervenants = racine.ChildNodes[2].ChildNodes;
+            }
 
             /// <summary>
             /// Charge le fichier XML à traiter. 
@@ -86,7 +88,7 @@ namespace Prestation_soin.Classes
                 XmlDocument SoinsXml = new XmlDocument();
                 string fichier = ConfigurationManager.AppSettings["chemin"];
                 SoinsXml.Load(fichier);
-                XmlElement racine = //
+                XmlElement racine = SoinsXml.DocumentElement;
                 Initialiser(racine);
 
             }
@@ -100,9 +102,9 @@ namespace Prestation_soin.Classes
             public static List<Dossier> XmlToDossiers()
             {
                 List<Dossier> lesDossiers = new List<Dossier>();
-                foreach (...)
+                foreach (Dossier undossier in LesDossiers)
                 {
-
+                lesDossiers.Add(undossier);
                 }
                 return lesDossiers;
             }
@@ -116,7 +118,7 @@ namespace Prestation_soin.Classes
             {
                 string nom = unDossierXML.ChildNodes[0].InnerText;
 
-                DateTime dateNaissance = TraitementXML.XmlToDateTime((XmlElement)unDossierXML.ChildNodes[2]);
+                DateTime dateNaissancePatient = TraitementXML.XmlToDateTime((XmlElement)unDossierXML.ChildNodes[2]);
                 if (unDossierXML.GetElementsByTagName("dossierprestations").Count == 0)
                 {
 
@@ -131,7 +133,7 @@ namespace Prestation_soin.Classes
                     {
 
                     }
-                    return new Dossier(nom, prenom, dateNaissance, lesPrestationsDuDossier);
+                    return new Dossier(nom, prenom, dateNaissancePatient, lesPrestationsDuDossier);
 
                 }
             }
@@ -294,13 +296,13 @@ namespace Prestation_soin.Classes
             public static void AfficherDossier(Dossier unDossier)
             {
                 Console.WriteLine("----- Début dossier --------------");
-                Console.WriteLine("Nom : " + unDossier.NomPatient + " Prenom : " + unDossier.PrenomPatient + " Date de naissance : " + unDossier.DateDeNaissancePatient.ToShortDateString());
-                Console.WriteLine("\tNombre de prestations : " + unDossier.MesPrestations.Count);
-                if (unDossier.MesPrestations.Count > 0)
+                Console.WriteLine("Nom : " + unDossier.nomPatient + " Prenom : " + unDossier.prenomPatient + " Date de naissance : " + unDossier.dateNaissancePatient.ToShortDateString());
+                Console.WriteLine("\tNombre de prestations : " + unDossier.mesPrestations.Count);
+                if (unDossier.mesPrestations.Count > 0)
                 {
-                    foreach (Prestation unePrestation in unDossier.MesPrestations)
+                    foreach (Prestation unePrestation in unDossier.mesPrestations)
                     {
-                        Console.WriteLine("\t" + unePrestation.Libelle + " - " + unePrestation.DateHeureSoin.ToString() + " - " + unePrestation.UnIntervenant);
+                        Console.WriteLine("\t" + unePrestation.libelle + " - " + unePrestation.dateHeureSoin.ToString() + " - " + unePrestation.unIntervenant);
                     }
                     Console.WriteLine("nombre de jours de soins : " + unDossier.getNbJoursSoins());
                     Console.WriteLine("nombre de prestations externes : " + unDossier.getNbPrestationsExternes());

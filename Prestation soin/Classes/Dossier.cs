@@ -23,6 +23,20 @@ namespace Prestation_soin.Classes
             this.mesPrestation = new List<Prestation>();
         }
 
+        public Dossier(string nomPatient, string prenomPatient, DateTime dateNaissancePatient, List<Prestation> lesPrestationsDuDossier)
+        {
+            this.nomPatient = nomPatient;
+            this.prenomPatient = prenomPatient;
+            this.dateNaissancePatient = dateNaissancePatient;
+            this.mesPrestation = new List<Prestation>();
+
+            foreach(Prestation prest in lesPrestationsDuDossier)
+            {
+                mesPrestation.Add(prest);
+            }
+        }
+
+
         public Dossier(string nomPatient, string prenomPatient)
         {
             this.nomPatient = nomPatient;
