@@ -102,9 +102,9 @@ namespace Prestation_soin.Classes
             public static List<Dossier> XmlToDossiers()
             {
                 List<Dossier> lesDossiers = new List<Dossier>();
-                foreach (Dossier unDossier in LesDossiers)
+                foreach (XmlElement unDossierXML in LesDossiers)
                 {
-                lesDossiers.Add(unDossier);
+                lesDossiers.Add(TraitementXML.XmlToDossier(unDossierXML));
                 }
                 return lesDossiers;
             }
@@ -149,6 +149,7 @@ namespace Prestation_soin.Classes
             {
                 string libellePrestation = unePrestationXML.ChildNodes[0].InnerText;
                 DateTime datePrestation = TraitementXML.XmlToDateTime((XmlElement)unePrestationXML.ChildNodes[1]);
+                XmlElement unIntervenantXML = ChercheIntervenant(Convert.ToInt32(unePrestationXML.GetAttribute("idintervenant")));
                 Intervenant unIntervenant = TraitementXML.XmlToIntervenant(unIntervenantXML);
 
                 return new Prestation(libellePrestation, datePrestation, unIntervenant);
@@ -206,7 +207,7 @@ namespace Prestation_soin.Classes
                 int idIntervenant = Convert.ToInt16(unIntervenantXml.GetAttribute("idintervenant"));
                 foreach (XmlElement unePrestationXml in LesPrestations)
                 {
-
+                    
                 }
                 return unIntervenant;
             }
@@ -247,6 +248,7 @@ namespace Prestation_soin.Classes
                 {
                     throw new Exception("Prestation non trouvée, arrêt du traitement");
                 }
+            return null;
             }
             /// <summary>
             /// cherche et retourne un élément correspondant à un intervenant dont l'ID passé en paramètre
@@ -255,19 +257,20 @@ namespace Prestation_soin.Classes
             /// <returns>un élément XML contenant les données de l'intervenant</returns>
             private static XmlElement ChercheIntervenant(int idIntervenant)
             {
-                int i = 0;
-                while (...)
+            //int i = 0;
+            //while (...)
+            return null;
             {
 
                 }
-                if (//)
-            {
-                    return (XmlElement)LesIntervenants[i];
-                }
-                else
-                {
-                    throw new Exception("Intervenant non trouvé, arrêt du traitement");
-                }
+            //    if (//)
+            //{
+            //        return (XmlElement)LesIntervenants[i];
+            //    }
+            //    else
+            //    {
+            //        throw new Exception("Intervenant non trouvé, arrêt du traitement");
+            //    }
             }
             /// <summary>
             /// Affiche de façon formatée les données des dossiers contenus dans une liste de dossiers
@@ -292,7 +295,7 @@ namespace Prestation_soin.Classes
             {
                 foreach (Intervenant unIntervenant in lesIntervenants)
                 {
-                    Console.WriteLine(unIntervenant.AfficheIntervenantComplet() + "\n");
+                    //Console.WriteLine(unIntervenant.AfficheIntervenantComplet() + "\n");
                 }
             }
             /// <summary>
@@ -309,7 +312,7 @@ namespace Prestation_soin.Classes
                 {
                     foreach (Prestation unePrestation in unDossier.MesPrestations)
                     {
-                        Console.WriteLine("\t" + unePrestation. + " - " + unePrestation.getDateHeureSoin().ToString() + " - " + unePrestation.getL_Intervenant());
+                       // Console.WriteLine("\t" + unePrestation. + " - " + unePrestation.getDateHeureSoin().ToString() + " - " + unePrestation.getL_Intervenant());
                     }
                     Console.WriteLine("nombre de jours de soins : " + unDossier.getNbJoursSoins());
                     Console.WriteLine("nombre de prestations externes : " + unDossier.getNbPrestationsExternes());
