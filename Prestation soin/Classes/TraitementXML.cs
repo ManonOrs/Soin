@@ -117,21 +117,22 @@ namespace Prestation_soin.Classes
             public static Dossier XmlToDossier(XmlElement unDossierXML)
             {
                 string nom = unDossierXML.ChildNodes[0].InnerText;
-
+                string prenom = unDossierXML.ChildNodes[1].InnerText;
                 DateTime dateNaissancePatient = TraitementXML.XmlToDateTime((XmlElement)unDossierXML.ChildNodes[2]);
+
                 if (unDossierXML.GetElementsByTagName("dossierprestations").Count == 0)
                 {
 
-                    // pas de prestations
+                    return new Dossier(nom, prenom, dateNaissancePatient);
                 }
                 else
                 {
-                    // au moins une prestation
+                // au moins une prestation
                     XmlNodeList lesPrestations = (unDossierXML.GetElementsByTagName("dossierprestations")[0]).ChildNodes;
                     List<Prestation> lesPrestationsDuDossier = new List<Prestation>();
                     foreach (XmlElement unePrestation in lesPrestations)
                     {
-
+                        lesPrestationsDuDossier.Add(unePrestation);
                     }
                     return new Dossier(nom, prenom, dateNaissancePatient, lesPrestationsDuDossier);
 
@@ -147,8 +148,8 @@ namespace Prestation_soin.Classes
             private static Prestation XmlToPrestation(XmlElement unePrestationXML)
             {
                 string libellePrestation = unePrestationXML.ChildNodes[0].InnerText;
-                ...
-            Intervenant unIntervenant = TraitementXML.XmlToIntervenant(unItervenantXML);
+                DateTime datePrestation = TraitementXML.XmlToDateTime((XmlElement)unePrestationXML.ChildNodes[1]);
+                Intervenant unIntervenant = TraitementXML.XmlToIntervenant(unIntervenantXML);
 
                 return new Prestation(libellePrestation, datePrestation, unIntervenant);
             }
@@ -162,17 +163,19 @@ namespace Prestation_soin.Classes
             private static Intervenant XmlToIntervenant(XmlElement unIntervenantXML)
             {
                 string nomIntervenant = unIntervenantXML.ChildNodes[0].InnerText;
-
-                if (unIntervenantXML.ChildNodes.Count == 2)
+                string prenomIntervenant = unIntervenantXML.ChildNodes[1].InnerText;
+            if (unIntervenantXML.ChildNodes.Count == 2)
                 {
                     // ce n'est pas un spécialiste
                     return new Intervenant(nomIntervenant, prenomIntervenant);
                 }
                 else
                 {
-                    // c'est un spécialiste
+                    string specialiteIntervenant = unIntervenantXML.ChildNodes[2].InnerText;
+                    string adresseIntervenant = unIntervenantXML.ChildNodes[3].InnerText;
+                    string telIntervenant = unIntervenantXML.ChildNodes[4].InnerText;
 
-                    return new IntervenantExterne(nomIntervenant, prenomIntervenant, specialiteIntervenant, adresseIntervenant, telIntervenant);
+                return new IntervenantExterne(nomIntervenant, prenomIntervenant, specialiteIntervenant, adresseIntervenant, telIntervenant);
                 }
             }
             /// <summary>
