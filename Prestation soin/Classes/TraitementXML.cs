@@ -132,6 +132,7 @@ namespace Prestation_soin.Classes
                     List<Prestation> lesPrestationsDuDossier = new List<Prestation>();
                     foreach (XmlElement unePrestation in lesPrestations)
                     {
+                        
                         lesPrestationsDuDossier.Add(TraitementXML.XmlToPrestation(unePrestation));
                     }
                     return new Dossier(nom, prenom, dateNaissancePatient, lesPrestationsDuDossier);
@@ -249,6 +250,18 @@ namespace Prestation_soin.Classes
                     throw new Exception("Prestation non trouvée, arrêt du traitement");
                 }
             }
+
+
+            private static List<Prestation> XmlToPrestations(XmlElement undossier)
+            {
+             List<Prestation> lesPrestations = new List<Prestation>();
+                foreach (XmlElement unePrestationXML in LesPrestations)
+                {
+                lesPrestations.Add(TraitementXML.XmlToPrestation(unePrestationXML));
+                }
+                return lesPrestations;
+            }
+
             /// <summary>
             /// cherche et retourne un élément correspondant à un intervenant dont l'ID passé en paramètre
             /// </summary>
