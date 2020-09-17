@@ -269,20 +269,19 @@ namespace Prestation_soin.Classes
             /// <returns>un élément XML contenant les données de l'intervenant</returns>
             private static XmlElement ChercheIntervenant(int idIntervenant)
             {
-            //int i = 0;
-            //while (...)
-            return null;
+            int i = 0;
+            while (Convert.ToInt16(((XmlElement)lesIntervenants[i]).GetAttribute("idintervenant")) != idIntervenant && i < LesIntervenants.Count)
             {
-
+                i++;
+            }
+                if (Convert.ToInt16(((XmlElement)lesIntervenants[i]).GetAttribute("idintervenant")) == idIntervenant)
+            {
+                return (XmlElement)LesIntervenants[i];
+            }
+            else
+                {
+                    throw new Exception("Intervenant non trouvé, arrêt du traitement");
                 }
-            //    if (//)
-            //{
-            //        return (XmlElement)LesIntervenants[i];
-            //    }
-            //    else
-            //    {
-            //        throw new Exception("Intervenant non trouvé, arrêt du traitement");
-            //    }
             }
             /// <summary>
             /// Affiche de façon formatée les données des dossiers contenus dans une liste de dossiers
