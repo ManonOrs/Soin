@@ -128,14 +128,14 @@ namespace Prestation_soin.Classes
                 else
                 {
                 // au moins une prestation
-                    XmlNodeList lesPrestations = (unDossierXML.GetElementsByTagName("dossierprestations")[0]).ChildNodes;
-                    List<Prestation> lesPrestationsDuDossier = new List<Prestation>();
-                    foreach (XmlElement unePrestation in lesPrestations)
-                    {
+                    //XmlNodeList lesPrestations = (unDossierXML.GetElementsByTagName("dossierprestations")[0]).ChildNodes;
+                    //List<Prestation> lesPrestationsDuDossier = new List<Prestation>();
+                    //foreach (XmlElement unePrestation in lesPrestations)
+                    //{
                         
-                        lesPrestationsDuDossier.Add(TraitementXML.XmlToPrestation(unePrestation));
-                    }
-                    return new Dossier(nom, prenom, dateNaissancePatient, lesPrestationsDuDossier);
+                    //    lesPrestationsDuDossier.Add(TraitementXML.XmlToPrestation(unePrestation));
+                    //}
+                    return new Dossier(nom, prenom, dateNaissancePatient, TraitementXML.XmlToPrestations(unDossierXML));
 
                 }
             }
