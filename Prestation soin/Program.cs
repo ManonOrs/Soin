@@ -38,23 +38,54 @@ namespace Prestation_soin
 
         static void Main(string[] args)
         {
-            Intervenant intervenant1 = new Intervenant("Jean", "Didier");
-            IntervenantExterne intervenant2 = new IntervenantExterne("Cardiologue", "Marseille", "06 98 45 21 23", "Vincent", "Frasel");
+            //Intervenant intervenant1 = new Intervenant("Jean", "Didier");
+            //IntervenantExterne intervenant2 = new IntervenantExterne("Cardiologue", "Marseille", "06 98 45 21 23", "Vincent", "Frasel");
 
-            DateTime date1 = new DateTime(2000, 8, 21);
-            DateTime date2 = new DateTime(2015, 7, 15);
-            DateTime date3 = new DateTime(2020, 11, 3);
+            //DateTime date1 = new DateTime(2000, 8, 21);
+            //DateTime date2 = new DateTime(2015, 7, 15);
+            //DateTime date3 = new DateTime(2020, 11, 3);
 
-            Dossier dossier1 = new Dossier("Gabriel", "Delage");
-            dossier1.ajoutePrestation("P1", date2, intervenant1);
-            dossier1.ajoutePrestation("P2", date3, intervenant2);
-
-            
+            //Dossier dossier1 = new Dossier("Gabriel", "Delage");
+            //dossier1.ajoutePrestation("P1", date2, intervenant1);
+            //dossier1.ajoutePrestation("P2", date3, intervenant2);
 
 
-            dossier1.afficheDossier();
-            //fermerProgramme();
-            Console.ReadKey();
+
+
+            //dossier1.afficheDossier();
+            ////fermerProgramme();
+            //Console.ReadKey();
+
+
+
+
+            try
+            {
+                List<Dossier> lesDossiers = new List<Dossier>();
+                // Chargement du fichier et initialisation des collections de noeuds XML
+                //lesDossiers, lesPrestations, lesIntervenants
+                TraitementXML.ChargeFichierXML();
+                // Chargement de la collection des objets de la classe Dossier
+                lesDossiers = TraitementXML.XmlToDossiers();
+                Console.WriteLine("Nombre de dossiers : " + lesDossiers.Count);
+                // Affichage des dossiers
+                TraitementXML.AfficherDossiers(lesDossiers);
+
+                // Gestion des intervenants
+                Console.WriteLine("\n\n----- Gestion des intervenants  -----");
+                // Chargement de la collection des objets de la classe Intervenant et IntevenantExterne
+                List<Intervenant> lesIntervenants = TraitementXML.XmlToIntervenants();
+                // affichage des intervenants 
+                TraitementXML.AfficherIntervenants(lesIntervenants);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            Console.Read();
         }
     }
+    
 }

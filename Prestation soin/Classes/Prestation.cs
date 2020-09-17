@@ -41,6 +41,11 @@ namespace Prestation_soin.Classes
             return this.L_Intervenant;
         }
 
+        public string Libelle { get => libelle; set => libelle = value; }
+        public DateTime DateHeureSoin { get => dateHeureSoin; set => dateHeureSoin = value; }
+        internal Intervenant L_Intervenant1 { get => L_Intervenant; set => L_Intervenant = value; }
+
+
         //Methodes
         public int compareTo(Prestation unePrestation)
         {
