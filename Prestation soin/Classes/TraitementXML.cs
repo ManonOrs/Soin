@@ -128,13 +128,14 @@ namespace Prestation_soin.Classes
                 else
                 {
                 // au moins une prestation
-                    XmlNodeList lesPrestations = (unDossierXML.GetElementsByTagName("dossierprestations")[0]).ChildNodes;
-                    List<Prestation> lesPrestationsDuDossier = new List<Prestation>();
-                    foreach (XmlElement unePrestation in lesPrestations)
-                    {
-                        lesPrestationsDuDossier.Add(TraitementXML.XmlToPrestation(unePrestation));
-                    }
-                    return new Dossier(nom, prenom, dateNaissancePatient, lesPrestationsDuDossier);
+                    //XmlNodeList lesPrestations = (unDossierXML.GetElementsByTagName("dossierprestations")[0]).ChildNodes;
+                    //List<Prestation> lesPrestationsDuDossier = new List<Prestation>();
+                    //foreach (XmlElement unePrestation in lesPrestations)
+                    //{
+                        
+                    //    lesPrestationsDuDossier.Add(TraitementXML.XmlToPrestation(unePrestation));
+                    //}
+                    return new Dossier(nom, prenom, dateNaissancePatient, TraitementXML.XmlToPrestations(unDossierXML));
 
                 }
             }
@@ -242,14 +243,25 @@ namespace Prestation_soin.Classes
                 }
                 if (Convert.ToInt16(((XmlElement)lesPrestations[i]).GetAttribute("idprestation")) == idPrestation)
                 {
-
+                return (XmlElement)lesPrestations[i];
                 }
                 else
                 {
                     throw new Exception("Prestation non trouvée, arrêt du traitement");
                 }
-            return null;
             }
+
+
+            private static List<Prestation> XmlToPrestations(XmlElement unDossier)
+            {
+             List<Prestation> lesPrestations = new List<Prestation>();
+                foreach (XmlElement unePrestationXML in unDossier.ChildNodes[3].ChildNodes)
+                {
+                lesPrestations.Add(TraitementXML.XmlToPrestation(TraitementXML.CherchePrestation(Convert.ToInt32(unePrestationXML.GetAttribute("idprestation")))));
+                }
+                return lesPrestations;
+            }
+
             /// <summary>
             /// cherche et retourne un élément correspondant à un intervenant dont l'ID passé en paramètre
             /// </summary>
@@ -257,20 +269,19 @@ namespace Prestation_soin.Classes
             /// <returns>un élément XML contenant les données de l'intervenant</returns>
             private static XmlElement ChercheIntervenant(int idIntervenant)
             {
-            //int i = 0;
-            //while (...)
-            return null;
+            int i = 0;
+            while (Convert.ToInt16(((XmlElement)lesIntervenants[i]).GetAttribute("idintervenant")) != idIntervenant && i < LesIntervenants.Count)
             {
-
+                i++;
+            }
+                if (Convert.ToInt16(((XmlElement)lesIntervenants[i]).GetAttribute("idintervenant")) == idIntervenant)
+            {
+                return (XmlElement)LesIntervenants[i];
+            }
+            else
+                {
+                    throw new Exception("Intervenant non trouvé, arrêt du traitement");
                 }
-            //    if (//)
-            //{
-            //        return (XmlElement)LesIntervenants[i];
-            //    }
-            //    else
-            //    {
-            //        throw new Exception("Intervenant non trouvé, arrêt du traitement");
-            //    }
             }
             /// <summary>
             /// Affiche de façon formatée les données des dossiers contenus dans une liste de dossiers
@@ -295,7 +306,7 @@ namespace Prestation_soin.Classes
             {
                 foreach (Intervenant unIntervenant in lesIntervenants)
                 {
-                    //Console.WriteLine(unIntervenant.AfficheIntervenantComplet() + "\n");
+                unIntervenant.AfficheIntervenantComplet();
                 }
             }
             /// <summary>

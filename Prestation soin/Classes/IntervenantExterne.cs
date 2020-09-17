@@ -12,7 +12,7 @@ namespace Prestation_soin.Classes
         private string adresse;
         private string tel;
 
-        public IntervenantExterne(string specialite, string adresse, string tel, string nom, string prenom)
+        public IntervenantExterne(string nom, string prenom, string specialite, string adresse, string tel)
             :base(nom,prenom)
         {
             this.specialite = specialite;
@@ -23,5 +23,10 @@ namespace Prestation_soin.Classes
         public string getSpecialite { get => specialite; }
         public string getAdresse { get => adresse; }
         public string getTel { get => tel; }
+
+        public override void AfficheIntervenantComplet()
+        {
+            Console.WriteLine("Nom: " + base.getNom + " Prenom: " + base.getPrenom + " Specialite: "+ this.getSpecialite + " Adresse: "+ this.getAdresse + " Telephone: "+this.getTel+ "\n");
+        }
     }
 }

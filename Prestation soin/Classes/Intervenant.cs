@@ -31,5 +31,10 @@ namespace Prestation_soin.Classes
             lesPrestation.Add(unePrestation);
         }
 
+        public virtual void AfficheIntervenantComplet()
+        {
+            Console.WriteLine("Nom: " + this.nom + " Prenom: " + this.prenom+"\n");
+        }
+
     }
 }
