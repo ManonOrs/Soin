@@ -252,12 +252,12 @@ namespace Prestation_soin.Classes
             }
 
 
-            private static List<Prestation> XmlToPrestations(XmlElement undossier)
+            private static List<Prestation> XmlToPrestations(XmlElement unDossier)
             {
              List<Prestation> lesPrestations = new List<Prestation>();
-                foreach (XmlElement unePrestationXML in LesPrestations)
+                foreach (XmlElement unePrestationXML in unDossier.ChildNodes[3].ChildNodes)
                 {
-                lesPrestations.Add(TraitementXML.XmlToPrestation(unePrestationXML));
+                lesPrestations.Add(TraitementXML.XmlToPrestation(TraitementXML.CherchePrestation(Convert.ToInt32(unePrestationXML.GetAttribute("idprestation")))));
                 }
                 return lesPrestations;
             }
