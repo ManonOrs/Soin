@@ -242,13 +242,12 @@ namespace Prestation_soin.Classes
                 }
                 if (Convert.ToInt16(((XmlElement)lesPrestations[i]).GetAttribute("idprestation")) == idPrestation)
                 {
-
+                return (XmlElement)lesPrestations[i];
                 }
                 else
                 {
                     throw new Exception("Prestation non trouvée, arrêt du traitement");
                 }
-            return null;
             }
             /// <summary>
             /// cherche et retourne un élément correspondant à un intervenant dont l'ID passé en paramètre
