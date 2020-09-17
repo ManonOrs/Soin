@@ -306,7 +306,7 @@ namespace Prestation_soin.Classes
             {
                 foreach (Intervenant unIntervenant in lesIntervenants)
                 {
-                    //Console.WriteLine(unIntervenant.AfficheIntervenantComplet() + "\n");
+                unIntervenant.AfficheIntervenantComplet();
                 }
             }
             /// <summary>
